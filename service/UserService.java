@@ -1,19 +1,22 @@
 package service;
-
+import repository.Repository;
 public class UserService {
-
-    public static void getCinema(String previewId) {
-
-    }
-
-    public static void getPreview() {
+    static Repository rp=new Repository();
+    public static void printPreview() {
         //printPreview
-        //previewid scan
-        //cinemaprint(preview)
-
-
+        rp.printPreview();
     }
 
+    public static void relatedCinemaprint(String previewId) {
+        rp.relatedCinemaPrint(previewId);
+    }
+    public static void printChair(String cinemaId) {
+        rp.printChair(cinemaId);
+    }
+
+    public static void changeStatusAndPersonInsert(String chairId,String name,String phoneNum) {
+        rp.changeStatusAndPersonInsert(chairId,name,phoneNum);
+    }
 
     public static int getCinema() {
 
@@ -23,8 +26,6 @@ public class UserService {
     public static int getPreview(int cinemaId) {
         return 1;
     }
-    public static void changeStatusAndPersonInsert(String cinemaId,String name,String phoneNum) {
 
-    }
 
 }

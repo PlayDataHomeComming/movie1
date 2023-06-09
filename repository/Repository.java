@@ -173,7 +173,7 @@ public class Repository {
 
     public static void insertCombinePreview(String previewId,String cinemaId){
         Connection conn = new JdbcConnection().getJdbc();
-        String sql = "insert into preview_cinema(cinema_id, preview_id)\n" +
+        String sql = "insert into preview_cinema(preview_id, cinema_id)\n" +
                 "values (?, ?)";
         try {
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -193,5 +193,99 @@ public class Repository {
         }
     }
 
+    public static void relatedCinemaPrint(String previewId){
+        Connection conn = new JdbcConnection().getJdbc();
+        String sql = "select * from (select * from cinema,preview_cinema where cinema.id=preview_cinema.cinema_id)as t where preview_id=?";
+        Integer id=null;
+        String cinemaName=null;
+        String address=null;
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1,previewId);
+            ResultSet res = psmt.executeQuery();
+            System.out.println("id\tcinemaName\taddress");
+            while (res.next()){
+                id=res.getInt("id");
+                cinemaName=res.getString("cinema_name");
+                address=res.getString("address");
+                System.out.printf("%-4d%-14s%s\n",id,cinemaName,address);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("connection close fail");
+        }
+    }
+    public static void printChair(String cinemaId){
+        Connection conn = new JdbcConnection().getJdbc();
+        String sql = "select * from chair "+
+                "where cinema_id=?";
+
+        Integer id=null;
+        Integer x=null;
+        Integer y=null;
+        String status=null;
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1,cinemaId);
+            ResultSet res = psmt.executeQuery();
+            System.out.println("id\tx\ty\tstatus");
+            while (res.next()){
+                id=res.getInt("id");
+                x=res.getInt("x");
+                y=res.getInt("y");
+                status=res.getString("status");
+                System.out.printf("%-4d%-5d%-5d%s\n",id,x,y,status);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("connection close fail");
+        }
+    }
+
+    public static void changeStatusAndPersonInsert(String chairId,String name,String phoneNum){
+        Connection conn = new JdbcConnection().getJdbc();
+        String sql = "update chair set status=\'x\' where id=?";
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, chairId);
+            if (psmt.executeUpdate() == 0) {
+                System.out.println("updateChair err");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql5 = "insert into person(chair_id, name,phone_num)\n" +
+                "values (?, ?, ?)";
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql5);
+            psmt.setString(1, chairId);
+            psmt.setString(2, name);
+            psmt.setString(3, phoneNum);
+            if (psmt.executeUpdate() == 0) {
+                System.out.println("insertPreview err");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("connection close fail");
+        }
+    }
 }
 

@@ -58,9 +58,13 @@ public class Controller {
             System.out.println("1:시사회 정보 확인 2:영화관내 시사회 정보 확인");
             String firstMode=sc.nextLine();
             if (firstMode.equals("1")){
-                us.getPreview();//시사회 정보 출력하고, 선택한 영화관 출력
+                us.printPreview();//시사회 정보 출력
+                System.out.printf("previewId = ");
                 String previewId=sc.nextLine();
-                us.getCinema(previewId);//영화관 좌석 출력
+                us.relatedCinemaprint(previewId);//시네마 상영하는 영화관 출력
+                System.out.printf("cinemaId = ");
+                String cinemaId=sc.nextLine();
+                us.printChair(cinemaId);
                 System.out.printf("chairId = ");
                 String chairId=sc.nextLine();
                 System.out.printf("name = ");
