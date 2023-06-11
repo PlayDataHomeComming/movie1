@@ -55,7 +55,7 @@ public class Controller {
         }
         if(mode.equals("2")){
             System.out.println("유저모드로 접속했습니다");
-            System.out.println("1:시사회 정보 확인 2:영화관내 시사회 정보 확인");
+            System.out.println("1:시사회 정보 확인 2:영화관내 시사회 정보 확인 3:처음으로");
             String firstMode=sc.nextLine();
             if (firstMode.equals("1")){
                 us.printPreview();//시사회 정보 출력
@@ -89,9 +89,8 @@ public class Controller {
                 System.out.printf("phoneNum = ");
                 String phoneNum=sc.nextLine();
                 us.changeStatusAndPersonInsert(chairId,name,phoneNum);//좌석 선택
-                selectMode();:
-
-
+                selectMode();
+            }else {
                 selectMode();
             }
         }
