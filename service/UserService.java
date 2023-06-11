@@ -10,22 +10,21 @@ public class UserService {
     public static void relatedCinemaprint(String previewId) {
         rp.relatedCinemaPrint(previewId);
     }
-    public static void printChair(String cinemaId) {
-        rp.printChair(cinemaId);
+    public static void printChair(String pcId) {
+        rp.printChair(pcId);
     }
 
     public static void changeStatusAndPersonInsert(String chairId,String name,String phoneNum) {
         rp.changeStatusAndPersonInsert(chairId,name,phoneNum);
     }
 
-    public static int getCinema() {
+    public static void printCinema() {
+        rp.printCinema();
 
-
-        return 1;
-    }
-    public static int getPreview(int cinemaId) {
-        return 1;
     }
 
+    public static  void relatedPreviewPrint(String cinemaId){
+        rp.relatedPreviewPrint(cinemaId);
+    }
 
 }

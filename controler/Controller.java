@@ -61,10 +61,10 @@ public class Controller {
                 us.printPreview();//시사회 정보 출력
                 System.out.printf("previewId = ");
                 String previewId=sc.nextLine();
-                us.relatedCinemaprint(previewId);//시네마 상영하는 영화관 출력
-                System.out.printf("cinemaId = ");
-                String cinemaId=sc.nextLine();
-                us.printChair(cinemaId);
+                us.relatedCinemaprint(previewId);//선택한 시사회 상영하는 영화관 출력
+                System.out.printf("pcId = ");//preview,cinema 연결된 id 입력
+                String pcId=sc.nextLine();
+                us.printChair(pcId);
                 System.out.printf("chairId = ");
                 String chairId=sc.nextLine();
                 System.out.printf("name = ");
@@ -75,8 +75,22 @@ public class Controller {
                 selectMode();
             }
             else if (firstMode.equals("2")){
-                int cinemaId=us.getCinema();//영화관 정보 출력하고, 선택한 시사회 아이디 반환
-                int previewId=us.getPreview(cinemaId);
+                us.printCinema();//영화관 정보 출력
+                System.out.printf("cinemaId = ");
+                String cinemaId=sc.nextLine();
+                us.relatedPreviewPrint(cinemaId);//선택한 영화관에서 상영하는 시사화 출력
+                System.out.printf("pcId = ");//preview,cinema 연결된 id 입력
+                String pcId=sc.nextLine();
+                us.printChair(pcId);
+                System.out.printf("chairId = ");
+                String chairId=sc.nextLine();
+                System.out.printf("name = ");
+                String name=sc.nextLine();
+                System.out.printf("phoneNum = ");
+                String phoneNum=sc.nextLine();
+                us.changeStatusAndPersonInsert(chairId,name,phoneNum);//좌석 선택
+                selectMode();:
+
 
                 selectMode();
             }
